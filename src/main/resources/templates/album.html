@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${album.getTitle()}"></title>
+</head>
+<body>
+<div align="center">
+    <a href="/">Все альбомы</a>
+</div>
+
+<br>
+
+<div class="container">
+    <span th:each="image, index:${album.getImages()}">
+        <img th:src="'data:image/jpeg;base64,' + ${image}" class="image" height="150">
+    </span>
+</div>
+
+<div align="center">
+    <form th:action="${album.getId()} + '/delete'" method="post">
+        <button class="delete-button" type="submit">Удалить альбом</button>
+    </form>
+</div>
+<div align="center">
+    <form th:action="${album.getId()} + '/update'" method="get">
+        <button class="update-button" type="submit">Обновить альбом</button>
+    </form>
+</div>
+
+<script>
+    document.querySelectorAll('.image').forEach(function(image) {
+        image.addEventListener('click', function (){
+            document.body.classList.toggle('image-open');
+            image.classList.toggle('enlarged');
+            document.querySelectorAll('.image').forEach(function(otherImage) {
+                if (otherImage !== image) {
+                    otherImage.classList.toggle('background');
+                }
+            });
+            document.querySelector('.delete-button').classList.toggle('black-button');
+            document.querySelector('.update-button').classList.toggle('black-button');
+        });
+    });
+</script>
+</body>
+</html>
+<style>
+    .black-button {
+        background: black;
+        border: none;
+    }
+    body.image-open {
+        background: black;
+    }
+    .container img {
+        cursor: pointer;
+        transition: transform 0.1s;
+        margin-right: 4px;
+    }
+    .container img.background {
+        position: fixed;
+        pointer-events: none;
+        z-index: -5;
+        filter: brightness(0);
+    }
+    .enlarged {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(3.5);
+    }
+</style>

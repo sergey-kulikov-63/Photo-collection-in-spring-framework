@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новый фотоальбом</title>
+</head>
+<body>
+<br>
+    <form th:action="@{/add}" method="post" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Название альбома" required/><br><br>
+        <input type="file" name="files" accept=".jpg, .jpeg, .png" multiple required/><br><br>
+        <input type="submit" value="Добавить"/>
+    </form>
+</body>
+</html>

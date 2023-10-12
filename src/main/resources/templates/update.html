@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <title th:text="'Обновить альбом ' + ${album.getTitle()}"></title>
+</head>
+<body>
+<h4 th:text="'Выберите новые фото для альбома ' + ${album.title}"></h4>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="files" accept=".jpg, .jpeg, .png" multiple required/><br><br>
+    <input type="submit" value="Обновить альбом"/>
+</form>
+</body>
+</html>
